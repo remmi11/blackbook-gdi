@@ -1,0 +1,106 @@
+{% extends 'blog/base.html' %} {% block content %}
+
+<form method="POST" class="post-form">{% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <p class="section-header">Project Info:</p>
+            <!-- !!! DATE AS SAVE timestamp !!! -->
+            <!-- <p>
+                <strong>Date:</strong>
+            </p>
+            <input type="date" class="form-control" name="date" value='{{ form.date_entered.value|date:' Y-m-d ' }}'/> -->
+            <p>
+                <strong>Date Ordered:</strong>
+            </p>
+            <input type="date" class="form-control" name="date_ordered" />
+
+            <p>
+                <strong>Ordered From:</strong>
+            </p>
+            <input type="text" class="form-control autocomplete-client" name="ordered_from" />
+
+            <p>
+                <strong>Ordered By:</strong>
+            </p>
+            <input type="text" class="form-control" name="ordered_by" />
+            <p>
+                <strong>Date Delivered:</strong>
+            </p>
+            <input type="date" class="form-control" name="date_deliveredby" />
+            <p>
+                <strong>Date Paid:</strong>
+            </p>
+            <input type="date" class="form-control" name="date_pd" />
+            <p>
+                <strong>Date Due:</strong>
+            </p>
+            <input type="text" class="form-control" name="date_due" />
+
+            <p>
+                <strong>File No.</strong>
+            </p>
+            <input type="text" name="file_no" class="form-control" />
+
+            <p>
+                <strong>Project No.
+                    <span style="color: red;">*</span>
+                </strong>
+            </p>
+            <input type="text" id="projectno" name="project_no" class="form-control" required />
+            <span style="color: red">{{errors}}</span>
+            <p>
+                <strong>Fee</strong>
+            </p>
+            <input type="number" name="fee" class="form-control" value='0.00' step="0.01" required/>
+
+            <p>
+                <strong>Cancelled</strong>
+            </p>
+            <input type="checkbox" name="cancelled" class="form-control">
+
+        </div>
+
+
+        <div class="col-md-6">
+            <!-- Address -->
+            <p class="section-header">Address:</p>
+            <p>
+                <strong>Address</strong>
+            </p>
+            <textarea name="address" class="form-control big-ext" rows=5> </textarea>
+            <p>
+                <strong>AKA</strong>
+            </p>
+            <input type="text" class="form-control" name="aka" />
+
+            <!-- Notes -->
+            <p class="section-header">Personel:</p>
+
+            <p>
+                <strong>Surveyor</strong>
+            </p>
+            <input type="text" name="surveyor" class="form-control" />
+            <p>
+                <strong>Field Crew</strong>
+            </p>
+            <input type="text" name="field_crew" class="form-control" />
+        </div>
+    </div>
+
+    <button class="btn btn-ext">Save</button>
+
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                method: "get",
+                url: '{% url "ajax_client_data" %}'
+            }).done(function (clients) {
+                $(".autocomplete-client").autocomplete({
+                    source: clients
+                });
+            });
+        });
+    </script>
+</form>
+{% endblock %}

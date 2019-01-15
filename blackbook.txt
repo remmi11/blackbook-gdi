@@ -1,0 +1,21 @@
+charlotte
+ctucker@beyondmapping.com
+6j0xjO
+
+jennifer
+jennifer@furmanland.com
+YnTK9M
+
+lacy
+lacy@beyondmapping.com
+XlE4Rb
+
+DELETE
+FROM
+    form_all a
+        USING form_all b
+WHERE
+    a.id < b.id
+    AND a.project_no = b.project_no
+    --AND a.title = 'GDI - Canadian'
+    AND a.county IS NULL;

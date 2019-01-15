@@ -1,0 +1,107 @@
+{% extends 'blog/base.html' %} {% block content %}
+
+<form method="POST" class="post-form">{% csrf_token %}
+    <input type="hidden" name="post_id" value='{{post.id}}' />
+    <div class="row">
+        <div class="col-md-6">
+            <p class="section-header">Project Info:</p>
+            <p>
+                <strong>Date Ordered: {{form.date_ordered.value}}</strong>
+            </p>
+            <input type="date" class="form-control" name="date_ordered" value='{{ form.date_ordered.value|date:'Y-m-d' }}' />
+
+            <p>
+                <strong>Ordered From:</strong>
+            </p>
+            <input type="text" class="form-control autocomplete-client" name="ordered_from" value='{{ form.ordered_from.value|default_if_none:"" }}' />
+
+            <p>
+                <strong>Ordered By:</strong>
+            </p>
+            <input type="text" class="form-control autocomplete-client" name="ordered_by" value='{{ form.ordered_by.value|default_if_none:"" }}' />
+            <p>
+                <strong>Date Delivered:</strong>
+            </p>
+            <input type="date" class="form-control" name="date_deliveredby" value='{{ form.date_deliveredby.value|date:'Y-m-d' }}' />
+            <p>
+                <strong>Date Paid:</strong>
+            </p>
+            <input type="date" class="form-control" name="date_pd" value='{{ form.date_pd.value|date:'Y-m-d' }}' />
+            <p>
+                <strong>Date Due:</strong>
+            </p>
+            <input type="text" class="form-control" name="date_due" value='{{ form.date_due.value|default_if_none:"" }}' />
+
+            <p>
+                <strong>File No.</strong>
+            </p>
+            <input type="text" name="file_no" class="form-control" value='{{ form.file_no.value|default_if_none:"" }}' />
+
+            <p>
+                <strong>Project No.
+                    <span style="color: red;">*</span>
+                </strong>
+            </p>
+            <input type="text" id="projectno" name="project_no" class="form-control" value='{{ form.project_no.value|default_if_none:"" }}'
+                required />
+            <span style="color: red">{{errors}}</span>
+
+            <p>
+                <strong>Fee</strong>
+            </p>
+            <input type="text" name="fee" class="form-control" value='{{ form.fee.value|default_if_none:"0.00" }}' step="0.01" required />
+
+            <p>
+                <strong>Cancelled</strong>
+            </p>
+            <input type="checkbox" name="cancelled"
+            {% if form.cancelled.value == "Yes" %} checked {% endif %}
+            class="form-control">
+        </div>
+
+
+        <div class="col-md-6">
+            <!-- Address -->
+            <p class="section-header">Address:</p>
+            <p>
+                <strong>Address
+                    <span style="color: red;">*</span>
+                </strong>
+            </p>
+            <textarea name="address" class="form-control big-ext" rows=5>{{ form.address.value|default_if_none:"" }}</textarea>
+            <p>
+                <strong>AKA</strong>
+            </p>
+            <input type="text" class="form-control" name="aka" value='{{ form.aka.value|default_if_none:"" }}' />
+
+            <!-- Notes -->
+            <p class="section-header">Personel:</p>
+
+            <p>
+                <strong>Surveyor</strong>
+            </p>
+            <input type="text" name="surveyor" class="form-control" value='{{ form.surveyor.value|default_if_none:"" }}' />
+            <p>
+                <strong>Field Crew</strong>
+            </p>
+            <input type="text" name="field_crew" class="form-control" value='{{ form.field_crew.value|default_if_none:"" }}' />
+
+        </div>
+    </div>
+
+    <button class="btn btn-ext">Save</button>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                method: "get",
+                url: '{% url "ajax_client_data" %}'
+            }).done(function (clients) {
+                $(".autocomplete-client").autocomplete({
+                    source: clients
+                });
+            });
+        });
+    </script>
+</form>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'blog/base.html' %} {% block content %}
+
+
+<table id="escalation" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>date_ordered</th>
+            <th>address    </th>
+            <th>ordered_from</th>
+            <th>ordered_by</th>
+            <th>date_deliveredby</th>
+            <th>file_no</th>
+            <th>project_no</th>
+            <th>date_pd</th>
+            <th>date_due</th>
+            <th>surveyor</th>
+            <th>field_crew</th>
+            <th>cancelled</th>
+            <th>aka</th>
+            <th>fee</th>
+            <th>Edit/Review</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>id</th>
+            <th>date_ordered</th>
+            <th>address</th>
+            <th>ordered_from</th>
+            <th>ordered_by</th>
+            <th>date_deliveredby</th>
+            <th>file_no</th>
+            <th>project_no</th>
+            <th>date_pd</th>
+            <th>date_due</th>
+            <th>surveyor</th>
+            <th>field_crew</th>
+            <th>cancelled</th>
+            <th>aka</th>
+            <th>fee</th>
+            <th>Edit/Review</th>
+        </tr>
+    </tfoot>
+</table>
+<!-- 
+<div class="add-new">
+    <a href="
+            {% if 'post' in request.path %}
+                {% url 'post_new' %}
+            {% elif 'user' in request.path and request.user.is_superuser %}
+                {% url 'user_new' %}
+            {% endif %}" class="top-menu">
+        <span>
+            <i class="fa fa-plus-circle" style="font-size:36px"></i>
+        </span>
+    </a>
+</div> -->
+
+
+{% endblock %}
