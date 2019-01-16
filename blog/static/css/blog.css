@@ -60,7 +60,7 @@ list-style-type:none !important;
     background-color: #12a2dc !important;
 }
 
-a {
+.navbar a {
     color: #fff;
     text-decoration: none;
 }
